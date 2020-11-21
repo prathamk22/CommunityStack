@@ -10,7 +10,7 @@ import com.example.communitystack.R
 import com.example.communitystack.util.PostUserModel
 import kotlinx.android.synthetic.main.home_page_item.view.*
 
-class HomePageAdapter(val onClick: (item: PostUserModel) -> Unit) :
+class HomePageAdapter(private val onClick: HomeItemOnClicks) :
     ListAdapter<PostUserModel, HomePageViewHolder>(object : DiffUtil.ItemCallback<PostUserModel>() {
         override fun areItemsTheSame(oldItem: PostUserModel, newItem: PostUserModel): Boolean {
             return oldItem == newItem
@@ -35,9 +35,18 @@ class HomePageAdapter(val onClick: (item: PostUserModel) -> Unit) :
 
 class HomePageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    fun bind(item: PostUserModel, onClick: (item: PostUserModel) -> Unit) = with(itemView){
+    fun bind(item: PostUserModel, onClick: HomeItemOnClicks) = with(itemView) {
         setOnClickListener {
-            onClick(item)
+            onClick.onItemClick(item)
+        }
+
+        likeTv.setOnClickListener {
+            likeTv.text = (likeTv.text.toString().toInt() + 1).toString()
+            onClick.onLikeClicked(item, true)
+        }
+
+        commentTv.setOnClickListener {
+            onClick.onCommentClick(item)
         }
 
         name.text = item.user?.name
@@ -47,4 +56,10 @@ class HomePageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         commentTv.text = item.posts?.answerCount.toString()
     }
 
+}
+
+interface HomeItemOnClicks {
+    fun onItemClick(item: PostUserModel)
+    fun onLikeClicked(item: PostUserModel, add: Boolean)
+    fun onCommentClick(item: PostUserModel)
 }

@@ -7,8 +7,18 @@
     android:padding="8dp"
     tools:context=".ui.view_question.ViewQuestionActivity">
 
+    <ProgressBar
+        android:id="@+id/loadingQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/titleTv"
         style="@style/TextAppearance.AppCompat.Display2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:textColor="@color/cardview_dark_background"
-        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/titleTv"
         tools:text="Description" />
 
     <TextView
@@ -53,7 +63,6 @@
         app:layout_constraintStart_toEndOf="@id/likeTv"
         app:layout_constraintTop_toBottomOf="@id/description"
         tools:text="100" />
-
 
     <EditText
         android:id="@+id/answerEt"

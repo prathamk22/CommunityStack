@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.communitystack.CommunityApp
 import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.util.*
 import kotlin.coroutines.resumeWithException
@@ -64,3 +65,11 @@ inline fun <reified T : ViewModel> createViewModel() =
     ViewModelProvider.AndroidViewModelFactory.getInstance(
         CommunityApp.instance
     ).create(T::class.java)
+
+fun Job.catch(onCatch: (e: java.lang.Exception) -> Unit){
+    try {
+        start()
+    }catch (e: Exception){
+        onCatch(e)
+    }
+}

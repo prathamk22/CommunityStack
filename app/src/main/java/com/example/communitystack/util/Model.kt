@@ -1,7 +1,5 @@
 package com.example.communitystack.util
 
-import com.google.firebase.Timestamp
-
 sealed class State<T> {
     class Loading<T> : State<T>()
     data class Success<T>(val data: T) : State<T>()
@@ -28,12 +26,26 @@ data class PostUserModel(
     val user: User? = null
 )
 
+data class AnswerUserModel(
+    val answer: Answer? = null,
+    val user: User? = null
+)
+
 data class Posts(
-    val user: String = "",
+    var user: String = "",
+    var id: String = "",
+    var title: String = "",
+    var description: String = "",
+    var answerCount: Int? = 0,
+    var likes: Int? = 0,
+    var tags: List<String> = mutableListOf(),
+    var answers: List<Answer>? = null,
+    var isDuplicate: Boolean? = false
+)
+
+data class Answer(
     val id: String = "",
-    val title: String = "",
-    val description: String = "",
-    val answerCount: Int = 0,
-    val likes: Int = 0,
-    val tags: List<String> = mutableListOf()
+    val user: String = "",
+    val answer: String = "",
+    val votes: Long = 0
 )

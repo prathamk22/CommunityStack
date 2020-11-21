@@ -32,7 +32,8 @@ class AddFragment : Fragment() {
                     id = randomId(),
                     title = title.text.toString(),
                     description = description.text.toString(),
-                    tags = vm.tagsArray
+                    tags = vm.tagsArray,
+                    isDuplicate = false
                 ))
             }else{
                 Snackbar.make(addBtn, "Add all fields properly", Snackbar.LENGTH_LONG).show()

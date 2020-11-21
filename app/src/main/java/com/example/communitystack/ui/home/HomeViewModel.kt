@@ -16,21 +16,34 @@ class HomeViewModel : ViewModel() {
 
     val allPosts = MutableLiveData<State<List<PostUserModel>?>>()
 
-    fun getAllPosts() = viewModelScope.launch {
-        allPosts.value = State.loading()
-        try {
+    fun getAllPosts() {
+        viewModelScope.launch {
+            allPosts.value = State.loading()
+
             val docs = postsDB.get().await()?.documents
             val users = userDB.get().await()?.documents
 
-            val posts = docs?.map {postDoc->
+            val posts = docs?.map { postDoc ->
                 val post = postDoc.toObject(Posts::class.java)
-                val postUser = users?.filter {user-> user.id == post?.user }?.firstOrNull()?.toObject(User::class.java)
+                post?.id = postDoc.id
+                val postUser = users?.filter { user -> user.id == post?.user }?.firstOrNull()
+                    ?.toObject(User::class.java)
                 PostUserModel(posts = post, user = postUser)
             }
 
             allPosts.value = State.success(posts)
-        }catch (e: Exception){
-            allPosts.value = State.failed(e.localizedMessage?:"")
+        }.catch {
+            allPosts.value = State.failed(it.localizedMessage ?: "")
+        }
+    }
+
+    fun likePost(id: String, add: Boolean) {
+        viewModelScope.launch {
+            val docs = postsDB.document(id)
+            val likes = (docs.get().await()?.get("likes")?: 0) as Long
+            docs.update("likes", if (add) likes + 1 else likes - 1)
+        }.catch {
+
         }
     }
 
