@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "610511904898",
+    "firebase_url": "https://community-stack.firebaseio.com",
+    "project_id": "community-stack",
+    "storage_bucket": "community-stack.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610511904898:android:d435a289d3b39be8a2549b",
+        "android_client_info": {
+          "package_name": "com.example.communitystack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610511904898-0firgkmf30cvt02gh1kuujfgffa27mq4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDftMTyeU1At1d0nPC-TtpsFNgNkMyyFi0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "610511904898-0firgkmf30cvt02gh1kuujfgffa27mq4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
