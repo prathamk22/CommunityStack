@@ -1,7 +1,7 @@
 # CommunityStack
 HackSRM Project
 
-# PPT Link
+# Video Link
 https://youtu.be/PahfDYLsT9Y
 
 # APK Link 
